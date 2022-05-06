@@ -1,0 +1,2 @@
+PORT = 5000
+MONGODB_URI = "mongodb+srv://ashish:12345@cluster0.ukb2s.mongodb.net/BookManagement?"

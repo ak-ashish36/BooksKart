@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Signup(props) {
     document.title = "Register on BooksKart";
-    const host = "http://localhost:5000";
-    // const host="https://bookskart-ak.herokuapp.com";
+    // const host = "http://localhost:5000";
+    const host="https://bookskart-ak.herokuapp.com";
     
     //Setting the value of name,email and password which is to be send to fetch api 
     const [credentials, setCredentials] = useState({ name: '', email: '', password: '' })

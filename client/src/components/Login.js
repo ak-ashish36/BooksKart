@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 function Login(props) {
     document.title = "BooksKart-Login";
-    const host = "http://localhost:5000";
-    // const host="https://bookskart-ak.herokuapp.com";
+    // const host = "http://localhost:5000";
+    const host="https://bookskart-ak.herokuapp.com";
 
     //Setting the value of email and password which is to be send to fetch api 
     const [credentials, setCredentials] = useState({ email: '', password: '' })

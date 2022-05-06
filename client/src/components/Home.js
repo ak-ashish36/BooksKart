@@ -3,8 +3,8 @@ import Spinner from './Spinner';
 
 
 function Home(props) {
-    const host = "http://localhost:5000";
-    // const host="https://bookskart-ak.herokuapp.com";
+    // const host = "http://localhost:5000";
+    const host="https://bookskart-ak.herokuapp.com";
 
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");

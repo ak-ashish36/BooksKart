@@ -62,11 +62,9 @@ router.put('/decreasebook/:id', async (req, res) => {
         if (!book) { return res.status(404).send(" Book Not Found") }
 
         let quantity = book.Quantity;
-        if (quantity == 1) {
-            await Books.findByIdAndDelete(req.params.id);
-            res.status(200).json("Removed");
+        if (quantity === 0) {
+            return;
         }
-
         book = await Books.findByIdAndUpdate(req.params.id, { Quantity: quantity - 1 }, { new: true })
         res.json({ book });
     } catch (error) {

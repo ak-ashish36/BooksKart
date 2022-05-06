@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login(props) {
+    document.title = "BooksKart-Login";
     const host = "http://localhost:5000";
+    // const host="https://bookskart-ak.herokuapp.com";
 
     //Setting the value of email and password which is to be send to fetch api 
     const [credentials, setCredentials] = useState({ email: '', password: '' })
@@ -28,7 +30,11 @@ function Login(props) {
         if (json.success) {
             localStorage.setItem(`${props.user}-token`, json.id);
             props.showAlert('Logged in Successfully', 'success');
-            navigate(`/${props.user}page`);
+            if (props.user === "user") {
+                navigate('/');
+            } else {
+                navigate('/adminpage');
+            }
         }
         else {
             props.showAlert('Invalid Credentials', 'danger')
@@ -48,7 +54,11 @@ function Login(props) {
                     <input type="password" className="form-control" value={credentials.password} onChange={onChange} name="password" id="password" />
                 </div>
                 <button type="submit" className="btn btn-primary">Submit</button>
+                {props.user === "user" && <div class="text-center">
+                    <p>New User? <Link to="/usersignup">Register</Link></p>
+                </div>}
             </form>
+
         </>
     )
 }

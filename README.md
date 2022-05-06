@@ -1,4 +1,4 @@
-# BooksKart a Book Store Application
+# Book Management MERN Stack Application
 
 # Steps to Run The Application
 
@@ -8,7 +8,5 @@
 ### cd ../
 ### npm run both
 
-## admin id : ashish@gmail.com
+## admin id : admin@bookskart.com
 ## password : 12345
-
- 

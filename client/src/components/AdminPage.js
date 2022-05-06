@@ -5,7 +5,8 @@ import Spinner from './Spinner';
 
 function AdminPage(props) {
     const host = "http://localhost:5000";
-
+    // const host="https://bookskart-ak.herokuapp.com";
+    
     const [loading, setLoading] = useState(true);
     const [books, setBooks] = useState([])
     // Get all Books
@@ -25,6 +26,7 @@ function AdminPage(props) {
     let navigate = useNavigate();
     useEffect(() => {
         if (localStorage.getItem('admin-token')) {
+            document.title = "BooksKart-Admin";
             getBooks();
         }
         else {
@@ -124,7 +126,7 @@ function AdminPage(props) {
     return (
         <>
             <div className="container my-1">
-                <h1>Ashish Library</h1>
+                <h1 className='text-center'>Book-Kart Adminstration</h1>
                 <hr />
                 <form id="libraryForm">
                     <div className="form-group row">
@@ -154,8 +156,8 @@ function AdminPage(props) {
                 </form>
                 {loading ? <Spinner /> :
                     <div id="table">
-                        {books.length === 0 ? <h2 className='container'>There are no Books Please Add some</h2> :
-                            <h2>Books Available</h2>}
+                        {books.length === 0 ? <h2 className='container text-center'>There are no Books Please Add some</h2> :
+                            <h2 className='text-center'>Availabe Books</h2>}
                         <table className="table table-striped">
                             <thead>
                                 <tr>
@@ -170,17 +172,13 @@ function AdminPage(props) {
                                     return <tr>
                                         <td>{book.name}</td>
                                         <td>{book.author}</td>
-                                        <td>{book.yearPublished.substring(0, 4)}</td>
+                                        <td>{book.yearPublished}</td>
                                         <td>
-                                            <i class="fa fa-minus fa-xs" aria-hidden="true" onClick={() => {
-                                                if (book.Quantity === 1) {
-                                                    deleteBook(book._id);
-                                                    return;
-                                                }
+                                            {book.Quantity <= 0 ? <>&#160;&#160;</> : <i class="fa fa-minus fa-xs" aria-hidden="true" onClick={() => {
                                                 decreaseBook(book._id);
                                                 props.showAlert("Books Updated", 'success');
-                                            }}></i>
-                                            {book.Quantity}
+                                            }}></i>}
+                                            &#160;{book.Quantity}&#160;
                                             <i class="fa fa-plus fa-xs" aria-hidden="true" onClick={() => {
                                                 increaseBook(book._id);
                                             }}></i>

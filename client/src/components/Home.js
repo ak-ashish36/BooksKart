@@ -3,8 +3,6 @@ import Spinner from './Spinner';
 
 
 function Home(props) {
-    // const host = "http://localhost:5000";
-    const host="https://bookskart-ak.herokuapp.com";
 
     const [loading, setLoading] = useState(true);
     const [search, setSearch] = useState("");
@@ -15,7 +13,7 @@ function Home(props) {
     // Get all Books
     const getBooks = async () => {
         // API Call 
-        const response = await fetch(`${host}/fetchbook`, {
+        const response = await fetch(`${props.host}/fetchbook`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -33,7 +31,7 @@ function Home(props) {
     // Get Search Result
     const handleClick = async (e) => {
         e.preventDefault();
-        const response = await fetch(`${host}/fetchbook/${search}`, {
+        const response = await fetch(`${props.host}/fetchbook/${search}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -45,7 +43,7 @@ function Home(props) {
     }
     const descreaseBook = async (id) => {
         // API Call
-        const response = await fetch(`${host}/decreasebook/${id}`, {
+        const response = await fetch(`${props.host}/decreasebook/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -70,7 +68,7 @@ function Home(props) {
     const buybook = async (id, name, author, year) => {
         if (localStorage.getItem('user-token')) {
             // API Call
-            const response = await fetch(`${host}/buybook/${id}/${name}/${author}/${year}`, {
+            const response = await fetch(`${props.host}/buybook/${id}/${name}/${author}/${year}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -100,26 +98,26 @@ function Home(props) {
                 {loading ? <Spinner /> : <>
                     {books.length === 0 ? <h2 className='container text-center'>No Books Available</h2> :
                         <h2 className='text-center'>Books Available</h2>}
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" name="seacch" value={search} onChange={onChange} placeholder="Search Books by Name , Author , PublishedYear" aria-label="Search" />
-                        <button class="btn btn-outline-success" onClick={handleClick} type="submit">Search</button>
+                    <form className="d-flex">
+                        <input className="form-control me-2" type="search" name="seacch" value={search} onChange={onChange} placeholder="Search Books by Name , Author , PublishedYear" aria-label="Search" />
+                        <button className="btn btn-outline-success" onClick={handleClick} type="submit">Search</button>
                     </form>
                     <hr />
                     <div className='container row'>
                         {books.map((book) => (
-                            <div className="col-md-4">
+                            <div className="col-md-4" key={book._id}>
                                 <div className="my-3">
                                     <div className="" style={{ width: '15rem' }}>
-                                        <img src="https://cdn.picpng.com/book/pattern-book-30960.png" style={{ width: '10rem' }} class="card-img-top" alt="book" />
-                                        <div class="card-body">
-                                            <h5 class="card-title">{book.name}</h5>
-                                            <p class="card-text"><b>By : </b>{book.author}</p>
-                                            <p class="card-text"><b>Year Published : </b>{book.yearPublished}</p>
-                                            <p class="card-text"><b>Copies Available : </b>{book.Quantity}</p>
+                                        <img src="https://cdn.picpng.com/book/pattern-book-30960.png" style={{ width: '10rem' }} className="card-img-top" alt="book" />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{book.name}</h5>
+                                            <p className="card-text"><b>By : </b>{book.author}</p>
+                                            <p className="card-text"><b>Year Published : </b>{book.yearPublished}</p>
+                                            <p className="card-text"><b>Copies Available : </b>{book.Quantity}</p>
                                             {book.Quantity<=0?<b className="btn btn-danger btn-lg disabled btn-sm">Out of Stock</b> :
                                             <b onClick={() => {
                                                 buybook(book._id, book.name, book.author, book.yearPublished);
-                                            }} class="btn btn-primary">Buy</b>}
+                                            }} className="btn btn-primary">Buy</b>}
                                         </div>
                                     </div>
                                 </div>

@@ -3,15 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import Spinner from './Spinner';
 
 function UserBooks(props) {
-    // const host = "http://localhost:5000";
-    const host="https://bookskart-ak.herokuapp.com";
 
     const [loading, setLoading] = useState(true);
     const [books, setBooks] = useState([])
     // Get all Books
     const getBooks = async () => {
         // API Call 
-        const response = await fetch(`${host}/fetchuserbook`, {
+        const response = await fetch(`${props.host}/fetchuserbook`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -43,14 +41,14 @@ function UserBooks(props) {
                     <hr />
                     <div className='container row'>
                         {books.map((book) => (
-                            <div className="col-md-4">
+                            <div className="col-md-4" key={book._id}>
                                 <div className="my-3">
                                     <div className="" style={{ width: '15rem' }}>
-                                        <img src="https://cdn.picpng.com/book/pattern-book-30960.png" style={{ width: '10rem' }} class="card-img-top" alt="book" />
-                                        <div class="card-body">
-                                            <h5 class="card-title">{book.name}</h5>
-                                            <p class="card-text"><b>By : </b>{book.author}</p>
-                                            <p class="card-text"><b>Year Published : </b>{book.yearPublished}</p>
+                                        <img src="https://cdn.picpng.com/book/pattern-book-30960.png" style={{ width: '10rem' }} className="card-img-top" alt="book" />
+                                        <div className="card-body">
+                                            <h5 className="card-title">{book.name}</h5>
+                                            <p className="card-text"><b>By : </b>{book.author}</p>
+                                            <p className="card-text"><b>Year Published : </b>{book.yearPublished}</p>
                                         </div>
                                     </div>
                                 </div>

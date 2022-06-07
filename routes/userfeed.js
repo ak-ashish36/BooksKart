@@ -19,7 +19,8 @@ router.get('/fetchbook',async (req, res) => {
 // ROUTE 2: Fetch Searched book
 router.get('/fetchbook/:name', async (req, res) => {
     try {
-        const books = await Books.find({$or:[{name:req.params.name},{author:req.params.name },{yearPublished:req.params.name}]});
+        var regex =new RegExp(req.params.name, "i");
+        const books = await Books.find({$or:[{name:regex},{author:regex },{yearPublished:regex}]});
         res.json(books)
     } catch (error) {
         res.status(500).json({ "Server Error": error.message });

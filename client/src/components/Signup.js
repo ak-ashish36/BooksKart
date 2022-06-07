@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 function Signup(props) {
     document.title = "Register on BooksKart";
-    // const host = "http://localhost:5000";
-    const host="https://bookskart-ak.herokuapp.com";
     
     //Setting the value of name,email and password which is to be send to fetch api 
     const [credentials, setCredentials] = useState({ name: '', email: '', password: '' })
@@ -16,7 +14,7 @@ function Signup(props) {
     //Action to be done after clicking submit button
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let url = `${host}/usersignup`;
+        let url = `${props.host}/usersignup`;
         const response = await fetch(url, {
             method: 'POST',
             headers: {

@@ -4,15 +4,13 @@ import Spinner from './Spinner';
 
 
 function AdminPage(props) {
-    // const host = "http://localhost:5000";
-    const host="https://bookskart-ak.herokuapp.com";
     
     const [loading, setLoading] = useState(true);
     const [books, setBooks] = useState([])
     // Get all Books
     const getBooks = async () => {
         // API Call 
-        const response = await fetch(`${host}/fetchbooks`, {
+        const response = await fetch(`${props.host}/fetchbooks`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -48,7 +46,7 @@ function AdminPage(props) {
         setNewbook({ name: "", author: "", year: "" })
     }
     const addBook = async (name, author, year) => {
-        const response = await fetch(`${host}/addbook`, {
+        const response = await fetch(`${props.host}/addbook`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -68,7 +66,7 @@ function AdminPage(props) {
     // Delete a Note
     const deleteBook = async (id) => {
         // API Call
-        const response = await fetch(`${host}/deletebook/${id}`, {
+        const response = await fetch(`${props.host}/deletebook/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -83,7 +81,7 @@ function AdminPage(props) {
     // Increase Book
     const increaseBook = async (id) => {
         // API Call
-        const response = await fetch(`${host}/increasebook/${id}`, {
+        const response = await fetch(`${props.host}/increasebook/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -104,7 +102,7 @@ function AdminPage(props) {
     }
     const decreaseBook = async (id) => {
         // API Call
-        const response = await fetch(`${host}/decreasebook/${id}`, {
+        const response = await fetch(`${props.host}/decreasebook/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -169,17 +167,17 @@ function AdminPage(props) {
                             </thead>
                             <tbody id='tableBody'>
                                 {books.map((book) => {
-                                    return <tr>
+                                    return <tr key={book._id}>
                                         <td>{book.name}</td>
                                         <td>{book.author}</td>
                                         <td>{book.yearPublished}</td>
                                         <td>
-                                            {book.Quantity <= 0 ? <>&#160;&#160;</> : <i class="fa fa-minus fa-xs" aria-hidden="true" onClick={() => {
+                                            {book.Quantity <= 0 ? <>&#160;&#160;</> : <i className="fa fa-minus fa-xs" aria-hidden="true" onClick={() => {
                                                 decreaseBook(book._id);
                                                 props.showAlert("Books Updated", 'success');
                                             }}></i>}
                                             &#160;{book.Quantity}&#160;
-                                            <i class="fa fa-plus fa-xs" aria-hidden="true" onClick={() => {
+                                            <i className="fa fa-plus fa-xs" aria-hidden="true" onClick={() => {
                                                 increaseBook(book._id);
                                             }}></i>
                                         </td>

@@ -12,7 +12,7 @@ import UserBooks from './components/UserBooks';
 function App() {
   document.title = "BooksKart";
   // const host = "http://localhost:5000";
-  const host="https://bookskart-ak.herokuapp.com";
+  const host="https://bookskart-ak.cyclic.app";
 
   const [alert, setAlert] = useState(null);
   const showAlert = (message, type) => {

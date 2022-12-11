@@ -66,14 +66,14 @@ function AdminPage(props) {
     // Delete a Note
     const deleteBook = async (id) => {
         // API Call
-        const response = await fetch(`${props.host}/deletebook/${id}`, {
+        await fetch(`${props.host}/deletebook/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 "admin-id": localStorage.getItem('admin-token')
             }
         });
-        const json = response.json();
+        // const json = response.json();
         const newBooks = books.filter((note) => { return note._id !== id })
         setBooks(newBooks)
         props.showAlert("Deleted Successfully", 'success');
@@ -81,15 +81,15 @@ function AdminPage(props) {
     // Increase Book
     const increaseBook = async (id) => {
         // API Call
-        const response = await fetch(`${props.host}/increasebook/${id}`, {
+        await fetch(`${props.host}/increasebook/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 "admin-id": localStorage.getItem('admin-token')
             }
         });
-        const json = response.json();
-        // // Logic to edit in client
+        
+        // Logic to edit in client
         for (let i = 0; i < books.length; i++) {
             const element = books[i];
             if (element._id === id) {
@@ -102,15 +102,15 @@ function AdminPage(props) {
     }
     const decreaseBook = async (id) => {
         // API Call
-        const response = await fetch(`${props.host}/decreasebook/${id}`, {
+        await fetch(`${props.host}/decreasebook/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 "admin-id": localStorage.getItem('admin-token')
             }
         });
-        const json = response.json();
-        // // Logic to edit in client
+
+        // Logic to edit in client
         for (let i = 0; i < books.length; i++) {
             const element = books[i];
             if (element._id === id) {

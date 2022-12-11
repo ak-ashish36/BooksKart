@@ -43,13 +43,13 @@ function Home(props) {
     }
     const descreaseBook = async (id) => {
         // API Call
-        const response = await fetch(`${props.host}/decreasebook/${id}`, {
+        await fetch(`${props.host}/decreasebook/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             }
         });
-        const json = response.json();
+        
         // // Logic to edit in client
         for (let i = 0; i < books.length; i++) {
             const element = books[i];
